@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/src/pages/api/settle-up.tsx
 
 # testing
 /coverage
