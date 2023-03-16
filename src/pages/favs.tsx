@@ -2,8 +2,8 @@ interface FavsProps {}
 
 const Favs: React.FC<FavsProps> = () => {
   const arrayList = [
-    { id: 0, nombre: "matias" },
-    { id: 1, nombre: "federico" },
+    { id: 0, nombre: 'matias' },
+    { id: 1, nombre: 'federico' },
   ];
 
   return (
