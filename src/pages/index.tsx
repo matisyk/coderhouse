@@ -1,10 +1,11 @@
-import NavBar from "../../components/NavBar";
-
+import ItemListContainer from '../../components/ItemListContainer';
+import NavBar from '../../components/NavBar';
 
 export default function Home() {
   return (
     <>
-      <NavBar/>
+      <NavBar />
+      <ItemListContainer greeting={'Bienvenidos'} />
     </>
   );
 }
