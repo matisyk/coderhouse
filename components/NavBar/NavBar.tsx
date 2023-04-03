@@ -12,13 +12,17 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 import { useState } from 'react';
-import SuperRare from '../public/SuperRare.png';
+import SuperRare from '../../public/SuperRare.png';
 import CartWidget from './CartWidget';
 
 const pages = ['All', 'Art', 'Gaming', 'Memberships', 'PFPs'];
 const settings = ['Profile', 'Account', 'Favorites', 'Watchlist'];
 
-function NavBar() {
+interface NavBarProps {
+  quantityInCart: number;
+}
+
+const NavBar: React.FC<NavBarProps> = ({ quantityInCart }) => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -94,7 +98,7 @@ function NavBar() {
           <Box sx={{ flexGrow: 0 }} p="20px">
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar />
               </IconButton>
             </Tooltip>
             <Menu
@@ -121,11 +125,11 @@ function NavBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <CartWidget />
+            <CartWidget quantityInCart={quantityInCart} />
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
-}
+};
 export default NavBar;

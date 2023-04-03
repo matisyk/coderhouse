@@ -1,11 +1,9 @@
-import ItemListContainer from '../../components/ItemListContainer';
-import NavBar from '../../components/NavBar';
+import Index from '../../components/Index';
 
 export default function Home() {
   return (
     <>
-      <NavBar />
-      <ItemListContainer greeting={'Bienvenidos'} />
+      <Index />
     </>
   );
 }
