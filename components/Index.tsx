@@ -15,6 +15,7 @@ const Index: React.FC<IndexProps> = () => {
         quantity={quantity}
         setQuantity={setQuantity}
         setQuantityInCart={setQuantityInCart}
+        quantityInCart={quantityInCart}
       />
     </>
   );

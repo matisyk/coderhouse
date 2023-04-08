@@ -5,6 +5,7 @@ interface ItemCountProps {
   quantity: number;
   setQuantity: (val: number) => void;
   setQuantityInCart: (val: number) => void;
+  quantityInCart: number;
 }
 
 const ItemCount: React.FC<ItemCountProps> = ({
@@ -12,6 +13,7 @@ const ItemCount: React.FC<ItemCountProps> = ({
   quantity,
   setQuantity,
   setQuantityInCart,
+  quantityInCart,
 }) => {
   const handleIncrement = () => {
     if (quantity < stock) {
@@ -26,12 +28,14 @@ const ItemCount: React.FC<ItemCountProps> = ({
   };
 
   const handleAddCart = () => {
-    setQuantityInCart(quantity);
+    setTimeout(() => {
+      setQuantityInCart(quantity);
+    }, 300);
   };
 
   return (
     <>
-      <Stack>
+      <Stack display="flex" flexDirection="row" alignItems="center" justifyContent='center'>
         <Button onClick={handleDecrement}>-</Button>
         <Typography variant="h4" textAlign="center">
           {quantity}
@@ -39,8 +43,8 @@ const ItemCount: React.FC<ItemCountProps> = ({
         <Button onClick={handleIncrement}>+</Button>
       </Stack>
       <Stack>
-        <Button onClick={handleAddCart} disabled={quantity == 0}>
-          Add to cart
+        <Button onClick={handleAddCart} disabled={quantity === quantityInCart}>
+          {quantityInCart <= quantity ? 'Add to cart' : 'Remove'}
         </Button>
       </Stack>
     </>
