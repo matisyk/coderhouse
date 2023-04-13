@@ -3,6 +3,13 @@ SuperRare e-commerce online de NFTs para el proyecto final de CoderHouse
 Pre entrega 1:
 - Creacion del component NavBar
 - Creacion del component CartWidget
+
+Pre entrega 2:
+- Creacion del component Contador
+- Creacion del component ItemList con el cataloto de todos los productos
+- Creacion del component ItemDetail con el detalle de un producto en especifico
+- Creacion del component ItemFilter con el filtrado de productos segun categoria
+
 ## Getting Started
 
 First, run the development server:

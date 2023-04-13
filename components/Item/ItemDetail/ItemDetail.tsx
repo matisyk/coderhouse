@@ -1,5 +1,5 @@
 import { Product } from '@/lib/models/Product';
-import { Paper, Stack, Typography, styled } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 
 type ItemDetailProps = {

@@ -1,16 +1,13 @@
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Typography } from '@mui/material';
 
-interface CartWidgetProps {
-  quantityInCart: number;
-}
+interface CartWidgetProps {}
 
-const CartWidget: React.FC<CartWidgetProps> = ({ quantityInCart }) => {
+const CartWidget: React.FC<CartWidgetProps> = () => {
   return (
     <>
       <Typography>
-        <ShoppingCartIcon />
-        {quantityInCart}
+        <ShoppingCartIcon />1
       </Typography>
     </>
   );

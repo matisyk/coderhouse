@@ -36,7 +36,6 @@ const Item: React.FC<ItemProps> = ({
   useEffect(() => {
     getProductById(1).then((product) => {
       setSelectedProduct(product);
-      console.log(product);
     });
   }, []);
 

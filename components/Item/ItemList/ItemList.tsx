@@ -1,6 +1,8 @@
 import { Product } from '@/lib/models/Product';
-import { Button, Paper, Stack, styled, Typography } from '@mui/material';
+import styled from '@emotion/styled';
+import { Paper, Stack, styled as style, Typography } from '@mui/material';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type T = {
   products: Product[];
@@ -15,9 +17,7 @@ const ItemList = ({ products }: T) => {
           direction="row"
           justifyContent="space-arround"
           alignItems="center"
-          spacing={1}
           key={product.id}
-          maxWidth={window.innerWidth / 4}
         >
           <Item>
             <Image
@@ -30,7 +30,9 @@ const ItemList = ({ products }: T) => {
               {product.name}
             </Typography>
             <Typography>{product.price} ETH</Typography>
-            <Button>Ver detalle</Button>
+            <Link href={`/item/${product.id}`}>
+              <WhiteLink>View detail</WhiteLink>
+            </Link>
           </Item>
         </Stack>
       ))}
@@ -40,10 +42,16 @@ const ItemList = ({ products }: T) => {
 
 export default ItemList;
 
-const Item = styled(Paper)(({ theme }) => ({
+const Item = style(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
+
+const WhiteLink = styled.a`
+  color: grey;
+  font-size: medium;
+  text-decoration: none;
+`;

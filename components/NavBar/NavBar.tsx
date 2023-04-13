@@ -1,8 +1,8 @@
 import MenuIcon from '@mui/icons-material/Menu';
+import { Paper, styled } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
@@ -11,6 +11,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import SuperRare from '../../public/SuperRare.png';
 import CartWidget from './CartWidget';
@@ -18,11 +19,9 @@ import CartWidget from './CartWidget';
 const pages = ['All', 'Art', 'Gaming', 'Memberships', 'PFPs'];
 const settings = ['Profile', 'Account', 'Favorites', 'Watchlist'];
 
-interface NavBarProps {
-  quantityInCart: number;
-}
+interface NavBarProps {}
 
-const NavBar: React.FC<NavBarProps> = ({ quantityInCart }) => {
+const NavBar: React.FC<NavBarProps> = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -42,10 +41,17 @@ const NavBar: React.FC<NavBarProps> = ({ quantityInCart }) => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Image src={SuperRare} alt="SuperRare logo" width={109} height={42} />
+          <Link href="/" passHref>
+            <Image
+              src={SuperRare}
+              alt="SuperRare logo"
+              width={109}
+              height={42}
+            />
+          </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -77,7 +83,7 @@ const NavBar: React.FC<NavBarProps> = ({ quantityInCart }) => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Link href={`/${page}`}>{page}</Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -85,13 +91,9 @@ const NavBar: React.FC<NavBarProps> = ({ quantityInCart }) => {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
+              <Item key={page}>
+                <Link href={`/${page}`}>{page}</Link>
+              </Item>
             ))}
           </Box>
 
@@ -125,7 +127,7 @@ const NavBar: React.FC<NavBarProps> = ({ quantityInCart }) => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <CartWidget quantityInCart={quantityInCart} />
+            <CartWidget />
           </Box>
         </Toolbar>
       </Container>
@@ -133,3 +135,12 @@ const NavBar: React.FC<NavBarProps> = ({ quantityInCart }) => {
   );
 };
 export default NavBar;
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+  margin: '1rem',
+}));

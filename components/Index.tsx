@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import Item from './Item/Item';
-import NavBar from './NavBar/NavBar';
 
 interface IndexProps {}
 
@@ -10,7 +9,6 @@ const Index: React.FC<IndexProps> = () => {
 
   return (
     <>
-      <NavBar quantityInCart={quantityInCart} />
       <Item
         quantity={quantity}
         setQuantity={setQuantity}
