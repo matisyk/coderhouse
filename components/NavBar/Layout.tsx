@@ -1,7 +1,7 @@
 import NavBar from './NavBar';
 
 interface LayoutProps {
-    children: any;
+    children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
