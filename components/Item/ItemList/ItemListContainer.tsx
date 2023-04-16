@@ -7,7 +7,9 @@ interface ItemListContainerProps {
 const ItemListContainer: React.FC<ItemListContainerProps> = ({ greeting }) => {
   return (
     <>
-      <Typography variant="h2">{greeting}</Typography>
+      <Typography textAlign="center" variant="h2" p="1rem">
+        {greeting}
+      </Typography>
     </>
   );
 };

@@ -1,36 +1,71 @@
 import { getProducts } from '@/asyncMock';
 import { Product } from '@/lib/models/Product';
 import styled from '@emotion/styled';
-import { Paper, Stack, Typography, styled as style } from '@mui/material';
+import {
+  CircularProgress,
+  Paper,
+  Stack,
+  Typography,
+  styled as style,
+} from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const ItemFilter = ({ category }: { category: string }) => {
   const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [showMessage, setShowMessage] = useState<boolean>(false);
+
+  const checkIfProductsExist = async (category: string): Promise<boolean> => {
+    const products = await getProducts();
+    return products.some((product) => product.category === category);
+  };
 
   useEffect(() => {
-    getProducts()
+    checkIfProductsExist(category)
+      .then((exists) => {
+        if (exists) {
+          return getProducts();
+        } else {
+          setShowMessage(true);
+          return Promise.reject('No hay productos en esta categoría');
+        }
+      })
       .then((data) => {
         const filteredProducts = data.filter(
           (product) => product.category === category
         );
         setProducts(filteredProducts);
+        setIsLoading(false);
       })
       .catch((error) => console.log(error));
   }, [category]);
 
-  if (!products.length) {
+  if (showMessage) {
     return (
-      <Typography variant="h2" textAlign="center">
-        Loading...
+      <Typography textAlign="center" variant="h2" p="1rem">
+        Ooops! Nothing to see here yet
       </Typography>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <>
+        <Typography variant="h2" textAlign="center" p="1rem">
+          Loading
+          <Stack direction="row" justifyContent="center" p="1rem">
+            <CircularProgress />
+          </Stack>
+        </Typography>
+      </>
     );
   }
 
   return (
     <div>
-      <Typography variant="h2" textAlign="center">
+      <Typography variant="h2" textAlign="center" p="1rem">
         {category}
       </Typography>
       <Stack
