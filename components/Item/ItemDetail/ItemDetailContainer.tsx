@@ -2,11 +2,13 @@ import { getProductById } from '@/asyncMock';
 import { Product } from '@/lib/models/Product';
 import { Button, Paper, Stack, Typography, styled } from '@mui/material';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 export default function ItemDetailContainer() {
   const [quantity, setQuantity] = useState(0);
+  const [quantityInCart, setQuantityInCart] = useState(0);
 
   const router = useRouter();
   const id = router.query.id ?? '0';
@@ -33,7 +35,9 @@ export default function ItemDetailContainer() {
   };
 
   const handleAddCart = () => {
-    setTimeout(() => {}, 300);
+    setTimeout(() => {
+      setQuantityInCart(quantity);
+    }, 300);
   };
 
   if (!selectedProduct) {
@@ -55,21 +59,29 @@ export default function ItemDetailContainer() {
           </Typography>
           <Typography>{price} ETH</Typography>
           <Typography>{description}</Typography>
-          <Stack
-            display="flex"
-            flexDirection="row"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Button onClick={handleDecrement}>-</Button>
-            <Typography variant="h4" textAlign="center">
-              {quantity}
-            </Typography>
-            <Button onClick={handleIncrement}>+</Button>
-          </Stack>
-          <Stack>
-            <Button onClick={handleAddCart}>Add to cart</Button>
-          </Stack>
+          {quantityInCart > 0 ? (
+            <Stack p="1rem">
+              <Link href="/cart">Finish order</Link>
+            </Stack>
+          ) : (
+            <>
+              <Stack
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Button onClick={handleDecrement}>-</Button>
+                <Typography variant="h4" textAlign="center">
+                  {quantity}
+                </Typography>
+                <Button onClick={handleIncrement}>+</Button>
+              </Stack>
+              <Stack>
+                <Button onClick={handleAddCart}>Add to cart</Button>
+              </Stack>
+            </>
+          )}
         </ItemStyled>
       </Stack>
     </>

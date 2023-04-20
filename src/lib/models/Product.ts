@@ -1,4 +1,4 @@
-// lib/models/product.ts
+// lib/models/Product.ts
 export type Product = {
   id: number;
   name: string;
