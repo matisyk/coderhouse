@@ -3,9 +3,9 @@ import { createContext, useState } from 'react';
 
 type CartContextType = {
   cart: Cart[];
-  addItem?: (item: Cart, quantity: number) => void;
-  removeItem?: (id: number) => void;
-  clearCart?: () => void;
+  addItem: (item: Cart, quantity: number) => void;
+  removeItem: (id: number) => void;
+  clearCart: () => void;
 };
 
 interface CartProviderProps {
@@ -14,12 +14,13 @@ interface CartProviderProps {
 
 export const CartContext = createContext<CartContextType>({
   cart: [],
+  addItem: () => {},
+  removeItem: () => {},
+  clearCart: () => {},
 });
 
-const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
+export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<Cart[]>([]);
-
-  console.log(cart);
 
   const isInCart = (id: number) => {
     return cart.some((item) => item.id === id);
@@ -47,5 +48,3 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     </CartContext.Provider>
   );
 };
-
-export default CartProvider;

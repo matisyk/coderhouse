@@ -1,14 +1,17 @@
 import { getProductById } from '@/asyncMock';
+import { CartContext } from '@/context/CartContext';
 import { Product } from '@/lib/models/Product';
 import { Button, Paper, Stack, Typography, styled } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 export default function ItemDetailContainer() {
   const [quantity, setQuantity] = useState(0);
   const [quantityInCart, setQuantityInCart] = useState(0);
+
+  const { addItem, cart } = useContext(CartContext);
 
   const router = useRouter();
   const id = router.query.id ?? '0';
@@ -38,6 +41,15 @@ export default function ItemDetailContainer() {
     setTimeout(() => {
       setQuantityInCart(quantity);
     }, 300);
+    if (selectedProduct) {
+      const item = {
+        id: selectedProduct?.id,
+        name: selectedProduct?.name,
+        price: selectedProduct?.price,
+        quantity: quantity,
+      };
+      addItem(item, quantity);
+    }
   };
 
   if (!selectedProduct) {
