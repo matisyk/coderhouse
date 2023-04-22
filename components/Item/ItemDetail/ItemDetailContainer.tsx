@@ -11,7 +11,8 @@ export default function ItemDetailContainer() {
   const [quantity, setQuantity] = useState(0);
   const [quantityInCart, setQuantityInCart] = useState(0);
 
-  const { addItem, cart } = useContext(CartContext);
+  const { addItem } = useContext(CartContext);
+  addItem({ id: 1, name: 'Bored Ape', price: 100, quantity: 2 }, 1);
 
   const router = useRouter();
   const id = router.query.id ?? '0';
