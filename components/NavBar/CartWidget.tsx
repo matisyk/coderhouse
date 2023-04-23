@@ -28,5 +28,4 @@ export default CartWidget;
 
 const WhiteLink = styled.a`
   color: white;
-  font-size: medium;
 `;

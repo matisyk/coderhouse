@@ -2,6 +2,7 @@ import { getProducts } from '@/asyncMock';
 import { Product } from '@/lib/models/Product';
 import styled from '@emotion/styled';
 import {
+  Button,
   CircularProgress,
   Paper,
   Stack,
@@ -44,9 +45,16 @@ const ItemFilter = ({ category }: { category: string }) => {
 
   if (showMessage) {
     return (
-      <Typography textAlign="center" variant="h2" p="1rem">
-        Ooops! Nothing to see here yet
-      </Typography>
+      <>
+        <Typography textAlign="center" variant="h2" p="1rem">
+          Ooops! Nothing to see here yet
+        </Typography>
+        <Stack display="flex" alignItems="center" flexDirection="column">
+          <Button variant="outlined">
+            <Link href="/">Go back home</Link>
+          </Button>
+        </Stack>
+      </>
     );
   }
 
