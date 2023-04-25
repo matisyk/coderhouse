@@ -61,7 +61,7 @@ export default function ItemDetailContainer() {
     );
   }
 
-  const { name, description, price, img } = selectedProduct;
+  const { name, description, price, img, stock } = selectedProduct;
   return (
     <>
       <Stack display="flex" direction="row" justifyContent="center" p={4}>
@@ -74,7 +74,9 @@ export default function ItemDetailContainer() {
           <Typography>{description}</Typography>
           {quantityInCart > 0 ? (
             <Stack p="1rem">
-              <Link href="/cart">Finish order</Link>
+              <Button variant="outlined">
+                <Link href="/cart">Finish order</Link>
+              </Button>
             </Stack>
           ) : (
             <>
@@ -88,7 +90,18 @@ export default function ItemDetailContainer() {
                 <Typography variant="h4" textAlign="center">
                   {quantity}
                 </Typography>
-                <Button onClick={handleIncrement}>+</Button>
+                {quantity <= stock ? (
+                  <Button onClick={handleIncrement}>+</Button>
+                ) : (
+                  <Button disabled>+</Button>
+                )}
+              </Stack>
+              <Stack>
+                {quantity <= stock ? null : (
+                  <Typography variant="h6" color="red">
+                    No more stock
+                  </Typography>
+                )}
               </Stack>
               <Stack>
                 <Button onClick={handleAddCart}>Add to cart</Button>

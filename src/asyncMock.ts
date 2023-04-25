@@ -7,7 +7,7 @@ const products: Product[] = [
     price: 64,
     category: 'ART',
     img: 'https://news.artnet.com/app/news-upload/2021/09/Yuga-Labs-Bored-Ape-Yacht-Club-4466.jpg',
-    stock: 20,
+    stock: 5,
     description:
       'The Bored Ape Yacht Club is a collection of 10,000 unique Bored Ape NFTs— unique digital collectibles living on the Ethereum blockchain.',
   },
@@ -17,7 +17,7 @@ const products: Product[] = [
     price: 83,
     category: 'GAMING',
     img: 'https://news.artnet.com/app/news-upload/2021/09/Yuga-Labs-Bored-Ape-Yacht-Club-4466.jpg',
-    stock: 20,
+    stock: 4,
     description:
       'The Bored Ape Yacht Club is a collection of 10,000 unique Bored Ape NFTs— unique digital collectibles living on the Ethereum blockchain.',
   },
@@ -27,7 +27,7 @@ const products: Product[] = [
     price: 77,
     category: 'MEMBERSHIPS',
     img: 'https://news.artnet.com/app/news-upload/2021/09/Yuga-Labs-Bored-Ape-Yacht-Club-4466.jpg',
-    stock: 20,
+    stock: 2,
     description:
       'The Bored Ape Yacht Club is a collection of 10,000 unique Bored Ape NFTs— unique digital collectibles living on the Ethereum blockchain.',
   },
@@ -37,7 +37,7 @@ const products: Product[] = [
     price: 94,
     category: 'ART',
     img: 'https://news.artnet.com/app/news-upload/2021/09/Yuga-Labs-Bored-Ape-Yacht-Club-4466.jpg',
-    stock: 20,
+    stock: 3,
     description:
       'The Bored Ape Yacht Club is a collection of 10,000 unique Bored Ape NFTs— unique digital collectibles living on the Ethereum blockchain.',
   },
@@ -47,7 +47,7 @@ const products: Product[] = [
     price: 80,
     category: 'GAMING',
     img: 'https://news.artnet.com/app/news-upload/2021/09/Yuga-Labs-Bored-Ape-Yacht-Club-4466.jpg',
-    stock: 20,
+    stock: 4,
     description:
       'The Bored Ape Yacht Club is a collection of 10,000 unique Bored Ape NFTs— unique digital collectibles living on the Ethereum blockchain.',
   },
@@ -57,7 +57,7 @@ const products: Product[] = [
     price: 74,
     category: 'MEMBERSHIPS',
     img: 'https://news.artnet.com/app/news-upload/2021/09/Yuga-Labs-Bored-Ape-Yacht-Club-4466.jpg',
-    stock: 20,
+    stock: 4,
     description:
       'The Bored Ape Yacht Club is a collection of 10,000 unique Bored Ape NFTs— unique digital collectibles living on the Ethereum blockchain.',
   },
