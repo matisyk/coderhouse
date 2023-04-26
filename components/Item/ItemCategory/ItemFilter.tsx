@@ -1,5 +1,5 @@
-import { getProducts } from '@/asyncMock';
 import { Product } from '@/lib/models/Product';
+import { db } from '@/services/firebase/firebaseConfig';
 import styled from '@emotion/styled';
 import {
   Button,
@@ -9,14 +9,20 @@ import {
   Typography,
   styled as style,
 } from '@mui/material';
+import { collection, getDocs } from 'firebase/firestore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+const getProducts = async (): Promise<Product[]> => {
+  const querySnapshot = await getDocs(collection(db, 'products'));
+  return querySnapshot.docs.map((doc) => doc.data() as Product);
+};
+
 const ItemFilter = ({ category }: { category: string }) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [showMessage, setShowMessage] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showMessage, setShowMessage] = useState(false);
 
   const checkIfProductsExist = async (category: string): Promise<boolean> => {
     const products = await getProducts();

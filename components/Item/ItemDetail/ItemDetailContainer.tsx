@@ -1,11 +1,17 @@
-import { getProductById } from '@/asyncMock';
 import { CartContext } from '@/context/CartContext';
 import { Product } from '@/lib/models/Product';
-import { Button, Paper, Stack, Typography, styled } from '@mui/material';
+import { db } from '@/services/firebase/firebaseConfig';
+import { Button, CircularProgress, Paper, Stack, Typography, styled } from '@mui/material';
+import { collection, getDocs } from 'firebase/firestore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
+
+const getProducts = async (): Promise<Product[]> => {
+  const querySnapshot = await getDocs(collection(db, 'products'));
+  return querySnapshot.docs.map((doc) => doc.data() as Product);
+};
 
 export default function ItemDetailContainer() {
   const [quantity, setQuantity] = useState(0);
@@ -22,10 +28,27 @@ export default function ItemDetailContainer() {
     undefined
   );
 
+  const checkIfProductsExist = async (id: number): Promise<boolean> => {
+    const products = await getProducts();
+    return products.some((product) => product.id === id);
+  };
+
   useEffect(() => {
-    getProductById(numberId).then((product) => {
-      setSelectedProduct(product);
-    });
+    checkIfProductsExist(numberId)
+      .then((exists) => {
+        if (exists) {
+          return getProducts();
+        } else {
+          return Promise.reject('No hay productos en esta categoría');
+        }
+      })
+      .then((data) => {
+        const filteredProducts = data.filter(
+          (product) => product.id === numberId
+        );
+        setSelectedProduct(filteredProducts[0]);
+      })
+      .catch((error) => console.log(error));
   }, [numberId]);
 
   const handleIncrement = () => {
@@ -55,9 +78,14 @@ export default function ItemDetailContainer() {
 
   if (!selectedProduct) {
     return (
-      <Typography variant="h2" textAlign="center">
-        Loading...
+      <>
+      <Typography variant="h2" textAlign="center" p="1rem">
+        Loading
+        <Stack direction="row" justifyContent="center" p="1rem">
+          <CircularProgress />
+        </Stack>
       </Typography>
+    </>
     );
   }
 
@@ -99,7 +127,7 @@ export default function ItemDetailContainer() {
               <Stack>
                 {quantity <= stock ? null : (
                   <Typography variant="h6" color="red">
-                    No more stock
+                    Max stock exceeded
                   </Typography>
                 )}
               </Stack>

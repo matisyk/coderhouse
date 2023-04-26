@@ -1,43 +1,43 @@
-import { getProductById, getProducts } from '@/asyncMock';
 import { Product } from '@/lib/models/Product';
-import { Paper, Stack, styled } from '@mui/material';
+import { db } from '@/services/firebase/firebaseConfig';
+import { CircularProgress, Stack, Typography } from '@mui/material';
+import { collection, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import ItemCount from './ItemCount/ItemCount';
-import ItemDetail from './ItemDetail/ItemDetail';
 import ItemList from './ItemList/ItemList';
 import ItemListContainer from './ItemList/ItemListContainer';
 
-interface ItemProps {
-  quantity: number;
-  setQuantity: (val: number) => void;
-  setQuantityInCart: (val: number) => void;
-  quantityInCart: number;
-}
+interface ItemProps {}
 
-const Item: React.FC<ItemProps> = ({
-  quantity,
-  setQuantity,
-  setQuantityInCart,
-  quantityInCart,
-}) => {
+const getProducts = async (): Promise<Product[]> => {
+  const querySnapshot = await getDocs(collection(db, 'products'));
+  return querySnapshot.docs.map((doc) => doc.data() as Product);
+};
+
+const Item: React.FC<ItemProps> = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(
-    undefined
-  );
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       const result = await getProducts();
       setProducts(result);
+      setIsLoading(false);
     };
     fetchData();
   }, []);
 
-  useEffect(() => {
-    getProductById(1).then((product) => {
-      setSelectedProduct(product);
-    });
-  }, []);
+  if (isLoading) {
+    return (
+      <>
+        <Typography variant="h2" textAlign="center" p="1rem">
+          Loading
+          <Stack direction="row" justifyContent="center" p="1rem">
+            <CircularProgress />
+          </Stack>
+        </Typography>
+      </>
+    );
+  }
 
   return (
     <>
@@ -60,28 +60,9 @@ const Item: React.FC<ItemProps> = ({
         alignItems="center"
         spacing={5}
         sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
-      >
-        <ItemStyled>
-          <ItemDetail selectedProduct={selectedProduct} />
-          <ItemCount
-            stock={10}
-            quantity={quantity}
-            setQuantity={setQuantity}
-            setQuantityInCart={setQuantityInCart}
-            quantityInCart={quantityInCart}
-          />
-        </ItemStyled>
-      </Stack>
+      ></Stack>
     </>
   );
 };
 
 export default Item;
-
-const ItemStyled = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
