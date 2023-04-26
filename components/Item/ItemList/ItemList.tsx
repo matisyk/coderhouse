@@ -18,6 +18,8 @@ const ItemList = ({ products }: T) => {
           justifyContent="space-arround"
           alignItems="center"
           key={product.id}
+          marginLeft="0px !important"
+          paddingBottom={{ xs: '2rem' }}
         >
           <Item>
             <Image

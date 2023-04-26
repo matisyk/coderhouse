@@ -79,7 +79,7 @@ const ItemFilter = ({ category }: { category: string }) => {
 
   return (
     <div>
-      <Typography variant="h2" textAlign="center" p="1rem">
+      <Typography variant="h3" textAlign="center" p="1rem">
         {category}
       </Typography>
       <Stack
@@ -98,6 +98,8 @@ const ItemFilter = ({ category }: { category: string }) => {
             alignItems="center"
             spacing={1}
             key={product.id}
+            marginLeft="0px !important"
+            paddingBottom={{ xs: '2rem' }}
           >
             <Item>
               <Image

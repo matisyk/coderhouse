@@ -1,7 +1,14 @@
 import { CartContext } from '@/context/CartContext';
 import { Product } from '@/lib/models/Product';
 import { db } from '@/services/firebase/firebaseConfig';
-import { Button, CircularProgress, Paper, Stack, Typography, styled } from '@mui/material';
+import {
+  Button,
+  CircularProgress,
+  Paper,
+  Stack,
+  Typography,
+  styled,
+} from '@mui/material';
 import { collection, getDocs } from 'firebase/firestore';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -18,7 +25,6 @@ export default function ItemDetailContainer() {
   const [quantityInCart, setQuantityInCart] = useState(0);
 
   const { addItem } = useContext(CartContext);
-  addItem({ id: 1, name: 'Bored Ape', price: 100, quantity: 2 }, 1);
 
   const router = useRouter();
   const id = router.query.id ?? '0';
@@ -79,20 +85,26 @@ export default function ItemDetailContainer() {
   if (!selectedProduct) {
     return (
       <>
-      <Typography variant="h2" textAlign="center" p="1rem">
-        Loading
-        <Stack direction="row" justifyContent="center" p="1rem">
-          <CircularProgress />
-        </Stack>
-      </Typography>
-    </>
+        <Typography variant="h2" textAlign="center" p="1rem">
+          Loading
+          <Stack direction="row" justifyContent="center" p="1rem">
+            <CircularProgress />
+          </Stack>
+        </Typography>
+      </>
     );
   }
 
   const { name, description, price, img, stock } = selectedProduct;
   return (
     <>
-      <Stack display="flex" direction="row" justifyContent="center" p={4}>
+      <Stack
+        display="flex"
+        direction="row"
+        p="2rem"
+        justifyContent="center"
+        width={{ sx: '100%', sm: '50%', md: '30%' }}
+      >
         <ItemStyled>
           <Image src={img} alt={name} width={170} height={170} />
           <Typography variant="h4" color="#3366CC">
@@ -132,7 +144,9 @@ export default function ItemDetailContainer() {
                 )}
               </Stack>
               <Stack>
-                <Button onClick={handleAddCart}>Add to cart</Button>
+                {quantity > 0 ? (
+                  <Button onClick={handleAddCart}>Add to cart</Button>
+                ) :  <Button disabled onClick={handleAddCart}>Add to cart</Button>}
               </Stack>
             </>
           )}
@@ -148,5 +162,4 @@ const ItemStyled = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
-  width: '30%',
 }));
