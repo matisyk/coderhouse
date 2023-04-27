@@ -130,11 +130,9 @@ export default function ItemDetailContainer() {
                 <Typography variant="h4" textAlign="center">
                   {quantity}
                 </Typography>
-                {quantity <= stock ? (
-                  <Button onClick={handleIncrement}>+</Button>
-                ) : (
-                  <Button disabled>+</Button>
-                )}
+                <Button disabled={quantity >= stock} onClick={handleIncrement}>
+                  +
+                </Button>
               </Stack>
               <Stack>
                 {quantity <= stock ? null : (
@@ -144,9 +142,9 @@ export default function ItemDetailContainer() {
                 )}
               </Stack>
               <Stack>
-                {quantity > 0 ? (
-                  <Button onClick={handleAddCart}>Add to cart</Button>
-                ) :  <Button disabled onClick={handleAddCart}>Add to cart</Button>}
+                <Button disabled={quantity == 0} onClick={handleAddCart}>
+                  Add to cart
+                </Button>
               </Stack>
             </>
           )}
