@@ -63,12 +63,14 @@ const Cart: React.FC<CartProps> = () => {
         <Stack display="flex" alignItems="center" flexDirection="column">
           <Stack paddingBottom="1rem" width="adjust">
             <Button variant="outlined" onClick={handleClearCart}>
-              Clean cart <DeleteIcon />
+              Clear cart <DeleteIcon />
             </Button>
           </Stack>
           <Stack width="adjust">
             <Button variant="contained">
-              Checkout <ShoppingCartIcon />
+              <Link href="/checkout">
+                Checkout <ShoppingCartIcon />
+              </Link>
             </Button>
           </Stack>
         </Stack>
