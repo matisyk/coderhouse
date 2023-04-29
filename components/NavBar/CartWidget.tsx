@@ -1,7 +1,6 @@
 import { CartContext } from '@/context/CartContext';
-import styled from '@emotion/styled';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useContext } from 'react';
 
@@ -14,10 +13,10 @@ const CartWidget: React.FC<CartWidgetProps> = () => {
     <>
       <Typography>
         <Link href="/cart">
-          <WhiteLink>
+          <Button variant="contained">
             <ShoppingCartIcon />
             {cart.length}
-          </WhiteLink>
+          </Button>
         </Link>
       </Typography>
     </>
@@ -25,7 +24,3 @@ const CartWidget: React.FC<CartWidgetProps> = () => {
 };
 
 export default CartWidget;
-
-const WhiteLink = styled.a`
-  color: white;
-`;

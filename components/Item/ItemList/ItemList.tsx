@@ -13,12 +13,7 @@ const ItemList = ({ products }: T) => {
     <>
       {products.map((product) => (
         <Stack
-          display="flex"
-          direction="row"
-          justifyContent="space-arround"
-          alignItems="center"
           key={product.id}
-          marginLeft="0px !important"
           paddingBottom={{ xs: '2rem' }}
         >
           <Item>
@@ -47,7 +42,7 @@ export default ItemList;
 const Item = style(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
-  padding: theme.spacing(1),
+  padding: theme.spacing(2),
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));

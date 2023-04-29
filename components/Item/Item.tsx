@@ -47,20 +47,11 @@ const Item: React.FC<ItemProps> = () => {
         direction="row"
         justifyContent="space-evenly"
         alignItems="center"
-        spacing={5}
         sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
+        flexWrap="wrap"
       >
         <ItemList products={products} />
       </Stack>
-      <Stack
-        p={5}
-        display="flex"
-        direction="row"
-        justifyContent="space-evenly"
-        alignItems="center"
-        spacing={5}
-        sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
-      ></Stack>
     </>
   );
 };

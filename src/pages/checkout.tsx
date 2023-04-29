@@ -1,9 +1,9 @@
-import CheckoutForm from "../../components/Cart/CheckoutForm";
+import Checkout from "../../components/Cart/Checkout";
 
 export default function checkout() {
   return (
     <>
-        <CheckoutForm />
+        <Checkout />
     </>
   );
 }

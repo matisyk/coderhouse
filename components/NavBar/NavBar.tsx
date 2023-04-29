@@ -1,5 +1,5 @@
 import MenuIcon from '@mui/icons-material/Menu';
-import { Paper, styled } from '@mui/material';
+import { Button, Paper, Stack, styled } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -83,7 +83,9 @@ const NavBar: React.FC<NavBarProps> = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Link href={`/${page}`}>{page}</Link>
+                  <Link href={`/${page}`}>
+                    <Button variant="contained">{page}</Button>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -91,9 +93,13 @@ const NavBar: React.FC<NavBarProps> = () => {
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Item key={page}>
-                <Link href={`/${page}`}>{page}</Link>
-              </Item>
+              <Stack key={page} paddingLeft="1rem">
+                <Link href={`/${page}`}>
+                  <Button color="secondary" variant="contained">
+                    {page}
+                  </Button>
+                </Link>
+              </Stack>
             ))}
           </Box>
 

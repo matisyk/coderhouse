@@ -1,12 +1,40 @@
 import { CartContext } from '@/context/CartContext';
-import { Box, Button, Stack, TextField, Typography } from '@mui/material';
-import { useContext } from 'react';
+import {
+  Box,
+  Button,
+  FormControl,
+  Stack,
+  TextField,
+  Typography,
+} from '@mui/material';
+import { useContext, useState } from 'react';
 
-interface CheckoutProps {}
+interface OrderData {
+  name: string;
+  phone: string;
+  email: string;
+}
+interface CheckoutFormProps {
+  onConfirm: (userData: OrderData) => void;
+}
 
-const CheckoutForm: React.FC<CheckoutProps> = () => {
+const CheckoutForm: React.FC<CheckoutFormProps> = ({ onConfirm }) => {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+
   const { cart } = useContext(CartContext);
   const total = cart.reduce((acc, item) => acc + item.quantity * item.price, 0);
+
+  const handleConfirm = (event: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+    const userData = {
+      name,
+      phone,
+      email,
+    };
+    onConfirm(userData);
+  };
 
   return (
     <>
@@ -20,46 +48,56 @@ const CheckoutForm: React.FC<CheckoutProps> = () => {
         alignItems="center"
         p="1rem"
       >
-        <Stack width={{ xs: '70%', sm: '40%', md: '20%' }} paddingBottom="2rem">
-          <TextField
-            type="text"
-            required
-            label="Nombre"
-            placeholder="Juan Perez"
-            multiline
-            variant="standard"
-          />
-        </Stack>
-        <Stack width={{ xs: '70%', sm: '40%', md: '20%' }} paddingBottom="2rem">
-          <TextField
-            type="number"
-            required
-            label="Telefono"
-            placeholder="1109876543"
-            multiline
-            variant="standard"
-          />
-        </Stack>
-        <Stack width={{ xs: '70%', sm: '40%', md: '20%' }} paddingBottom="2rem">
-          <TextField
-            type="email"
-            required
-            label="Email"
-            placeholder="juan@gmail.com"
-            multiline
-            variant="standard"
-          />
-        </Stack>
-        <Stack>
-          <Typography textAlign="center" paddingBottom="2rem" variant="h3">
-            Total {total} ETH
-          </Typography>
-        </Stack>
-        <Stack>
-          <Button variant="contained" disabled={total == 0}>
-            Confirm order
-          </Button>
-        </Stack>
+        <form onSubmit={handleConfirm}>
+          <FormControl>
+            <Stack paddingBottom="2rem">
+              <TextField
+                type="text"
+                required
+                label="Name"
+                placeholder="Juan Perez"
+                multiline
+                variant="standard"
+                value={name}
+                onChange={({ target }) => setName(target.value)}
+              />
+            </Stack>
+            <Stack paddingBottom="2rem">
+              <TextField
+                type="number"
+                required
+                label="Telephone"
+                placeholder="1109876543"
+                multiline
+                variant="standard"
+                value={phone}
+                onChange={({ target }) => setPhone(target.value)}
+              />
+            </Stack>
+            <Stack paddingBottom="2rem">
+              <TextField
+                type="email"
+                required
+                label="Email"
+                placeholder="juan@gmail.com"
+                multiline
+                variant="standard"
+                value={email}
+                onChange={({ target }) => setEmail(target.value)}
+              />
+            </Stack>
+            <Stack>
+              <Typography textAlign="center" paddingBottom="2rem" variant="h3">
+                Total {total} ETH
+              </Typography>
+            </Stack>
+            <Stack>
+              <Button type="submit" variant="contained" disabled={total == 0}>
+                Confirm order
+              </Button>
+            </Stack>
+          </FormControl>
+        </form>
       </Box>
     </>
   );

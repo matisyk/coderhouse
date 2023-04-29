@@ -104,6 +104,7 @@ export default function ItemDetailContainer() {
         p="2rem"
         justifyContent="center"
         width={{ sx: '100%', sm: '50%', md: '30%' }}
+        margin="0 auto"
       >
         <ItemStyled>
           <Image src={img} alt={name} width={170} height={170} />
