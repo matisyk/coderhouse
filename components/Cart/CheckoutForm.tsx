@@ -66,7 +66,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onConfirm }) => {
               <TextField
                 type="number"
                 required
-                label="Telephone"
+                label="Phone"
                 placeholder="1109876543"
                 multiline
                 variant="standard"
