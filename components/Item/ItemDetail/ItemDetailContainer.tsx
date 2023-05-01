@@ -136,7 +136,7 @@ export default function ItemDetailContainer() {
                 </Button>
               </Stack>
               <Stack>
-                {quantity <= stock ? null : (
+                {quantity < stock ? null : (
                   <Typography variant="h6" color="red">
                     Max stock exceeded
                   </Typography>

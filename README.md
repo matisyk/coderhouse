@@ -10,6 +10,12 @@ Pre entrega 2:
 - Creacion del component ItemDetail con el detalle de un producto en especifico
 - Creacion del component ItemFilter con el filtrado de productos segun categoria
 
+Entrega final:
+- Creacion del CartContext con el contador del carrito sincronizado
+- Creacion del component Cart con el detalle de los productos añadidos al carrito
+- Reemplazo del asyncMock a Firestore
+- Creacion del component Checkout con el formulario para cargar los datos del comprador y finalizar la compra con un orderId
+
 ## Getting Started
 
 First, run the development server:

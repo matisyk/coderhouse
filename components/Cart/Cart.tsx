@@ -19,6 +19,8 @@ const Cart: React.FC<CartProps> = () => {
     clearCart();
   };
 
+  const totalCartItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+
   if (cart.length < 1) {
     return (
       <>
@@ -36,7 +38,7 @@ const Cart: React.FC<CartProps> = () => {
     return (
       <>
         <Typography textAlign="center" p="1rem" variant="h3">
-          Total cart items {cart.length}
+          Total cart items {totalCartItems}
         </Typography>
         {cart.map((item) => {
           return (
