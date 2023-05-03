@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: 'news.artnet.com'
+        hostname: 'news.artnet.com',
       },
     ],
   },
